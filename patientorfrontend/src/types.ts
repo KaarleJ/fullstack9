@@ -1,39 +1,25 @@
+
+export enum Gender {
+  Male = "male",
+  Female = "female",
+  Other = "other"
+}
+
+export interface Patient {
+  id: string;
+  name: string;
+  occupation: string;
+  gender: Gender;
+  ssn?: string;
+  dateOfBirth?: string;
+  entries?: Entry[]
+}
+
 export interface Diagnose {
   code: string,
   name: string,
   latin?: string,
 }
-
-export enum Gender {
-  Male = 'male',
-  Female = 'female'
-}
-
-export interface Patient {
-  id: string,
-  name: string,
-  dateOfBirth: string,
-  ssn: string,
-  gender: Gender,
-  occupation: string,
-  entries: Entry[]
-}
-
-export type SecurePatient = Omit<Patient, 'ssn'>;
-
-export type NewPatient = Omit<Patient, 'id' | 'entries'>;
-
-export interface Patient {
-  id: string,
-  name: string,
-  ssn: string,
-  occupation: string,
-  gender: Gender,
-  dateOfBirth: string,
-  entries: Entry[]
-}
-
-export type PublicPatient = Omit<Patient, 'ssn' | 'entries'>;
 
 export enum HealthCheckRating {
   "Healthy" = 0,
@@ -81,4 +67,7 @@ export type Entry =
   | OccupationalHealthcareEntry
   | HealthCheckEntry;
 
-export type NewEntry = Omit<Entry, 'id'>;
+  export type NewEntry =
+  | Omit<HospitalEntry, 'id'>
+  | Omit<OccupationalHealthcareEntry, 'id'>
+  | Omit<HealthCheckEntry,'id'>;
